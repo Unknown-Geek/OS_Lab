@@ -75,7 +75,7 @@ int main()
     }
 
     // Main Logic
-    for (int i = 0; i < row; i++)
+    while(index < row)
     {
         for (int j = 0; j < row; j++)
         {
