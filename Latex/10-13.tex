@@ -1,0 +1,317 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Page layout settings
+\usepackage[a4paper, left=2cm, right=1cm, top=2cm, bottom=1cm]{geometry}
+\usepackage{minted}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{graphicx} % for image inclusion
+\usepackage{float} % for positioning images
+\usepackage{array}
+\usepackage{fancyhdr}  % Load fancyhdr package
+\renewcommand{\headrulewidth}{0pt}  % Remove the horizontal line in header
+\pagestyle{empty}  % Start with an empty default style
+
+\pagestyle{fancy}  
+\fancyhf{}  
+\fancyhead[L]{Date: }  % Increase font size & bold
+\fancyhead[R]{Page No: } 
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+% EXPERIMENT 10
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Process Management System Calls - 01}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Create a new process using the fork() system call. Have the processes introduce themselves with their process IDs as follows:
+
+Parent: I am \textless myID\textgreater, and my child is \textless mychildID\textgreater \\
+Child: I am \textless myID\textgreater, and my parent is \textless myparentID\textgreater
+
+Use the pstree command to display the process tree for the child process starting from the
+init process. The child process is to be “highlighted” in the tree.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Invoke the "fork()" system call and store the return value into "pid"\\
+3. If pid is less than zero, goto step-6\\
+4. Else if pid is zero,\\
+\hspace*{1cm} 4.1. Invoke the "getpid()" system call and output the pid of the current process \hspace*{2cm} (child pid)\\
+\hspace*{1cm} 4.2. Invoke the "getppid()" system call and output the pid of the parent process \hspace*{2cm}  (parent pid) \\
+5. Else,\\
+\hspace*{1cm} 5.1. Output "pid" (child pid)\\
+\hspace*{1cm} 5.2. Invoke the "getpid()" system call and output pid of the current process (parent \hspace*{2cm} pid)\\
+6. Execute the command "pstree -p $|$ grep $<childId>$" in the command line\\
+7. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{fork_process_demo.c}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{10.png} 
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+C program demonstrating the use of fork system call was executed and verified.
+\end{quote}
+
+% EXPERIMENT 11
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Process Management System Calls - 02}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Fork two processes. The parent process inputs an integer array. One child prints all the
+even numbers in the array and the other prints all the odd numbers. Use waitpid() system
+call to ensure that all odd numbers are printed first followed by the even numbers.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Read number of elements, "n"\\
+3. Read the elements of the array, "arr"\\
+4. Invoke the "fork()" system call and store the return value into "pid1"\\
+5. If "pid1" is less than zero, goto step-8\\
+6. Else if "pid1" is zero, loop through elements of "arr" and output the odd elements\\
+7. Else,\\
+\hspace*{1cm} 7.1. Invoke the "waitpid()" system call to wait until child process terminates\\
+\hspace*{1cm} 7.2. Invoke the "fork()" system call and store the return value into "pid2"\\
+\hspace*{1cm} 7.3. If "pid2" is less than zero goto step-8\\
+\hspace*{1cm} 7.4. Else if "pid2" is zero, loop through elements of "arr" and output the even \hspace*{2cm} elements\\
+\hspace*{1cm} 7.5. Else, invoke the "waitpid()" system call to wait until the child process \hspace*{2cm} terminates\\
+8. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{odd_even_processor.c}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{300} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=300]{11.png} 
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+C program to display odd and even numbers from input using processes was executed and verified.
+\end{quote}
+
+% EXPERIMENT 12
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{CPU Scheduling Algorithms}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Input a list of processes, their CPU burst times (integral values), arrival times, and
+priorities. Then simulate the following scheduling algorithms on the process mix:\\
+(a) FCFS\\
+(b) SJF\\
+(c) SRTF\\
+(d) non-preemptive priority (a larger priority number implies a higher priority)\\
+(e) RR (with a quantum of 3 units)\\
+Determine which algorithm results in the minimum average waiting time.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Define function for FCFS scheduling\\
+\hspace*{1cm} 2.1. Initialize "current\_time" and "total\_waiting" to 0\\
+\hspace*{1cm} 2.2. For each process, repeat steps 2.3-2.6 until end of process list\\
+\hspace*{1cm} 2.3. Compute completion time\\
+\hspace*{1cm} 2.4. Compute turnaround time\\
+\hspace*{1cm} 2.5. Compute waiting time and add to "total\_waiting"\\
+\hspace*{1cm} 2.6. Update "current\_time"\\
+\hspace*{1cm} 2.7. Output average waiting time\\
+3. Define function for SJF scheduling\\
+\hspace*{1cm} 3.1. Initialize "completed", "total\_waiting", and "current\_time" to 0\\
+\hspace*{1cm} 3.2. Track completion status with "is\_completed"\\
+\hspace*{1cm} 3.3. While not all processes are completed, repeat steps 3.4-3.8 until all processes are completed\\
+\hspace*{1cm} 3.4. Select the shortest available process\\
+\hspace*{1cm} 3.5. Compute completion, turnaround, and waiting times\\
+\hspace*{1cm} 3.6. Add waiting time to "total\_waiting"\\
+\hspace*{1cm} 3.7. Mark process as completed\\
+\hspace*{1cm} 3.8. Update "current\_time"\\
+\hspace*{1cm} 3.9. Output average waiting time\\
+4. Define function for priority scheduling\\
+\hspace*{1cm} 4.1. Initialize "completed", "total\_waiting", and "current\_time" to 0\\
+\hspace*{1cm} 4.2. Track completion status with "is\_completed"\\
+\hspace*{1cm} 4.3. While not all processes are completed, repeat steps 4.4-4.8 until all processes are completed\\
+\hspace*{1cm} 4.4. Select highest-priority available process\\
+\hspace*{1cm} 4.5. Compute completion, turnaround, and waiting times\\
+\hspace*{1cm} 4.6. Add waiting time to "total\_waiting"\\
+\hspace*{1cm} 4.7. Mark process as completed\\
+\hspace*{1cm} 4.8. Update "current\_time"\\
+\hspace*{1cm} 4.9. Output average waiting time\\
+5. Define function for round robin scheduling\\
+\hspace*{1cm} 5.1. Initialize "current\_time", "completed", and "total\_waiting" to 0\\
+\hspace*{1cm} 5.2. Track remaining burst time with "remaining\_time"\\
+\hspace*{1cm} 5.3. While not all processes are completed, repeat steps 5.4-5.8 until all processes are completed\\
+\hspace*{1cm} 5.4. Select a process with remaining burst time\\
+\hspace*{1cm} 5.5. Execute for a time slice or remaining time\\
+\hspace*{1cm} 5.6. Update "current\_time" and "remaining\_time"\\
+\hspace*{1cm} 5.7. If process completes, compute turnaround and waiting times\\
+\hspace*{1cm} 5.8. Update "total\_waiting"\\
+\hspace*{1cm} 5.9. Output average waiting time\\
+6. Define function for SRTF scheduling\\
+\hspace*{1cm} 6.1. Initialize "current\_time", "completed", and "total\_waiting" to 0\\
+\hspace*{1cm} 6.2. Track remaining burst time with "remaining\_time"\\
+\hspace*{1cm} 6.3. While not all processes are completed, repeat steps 6.4-6.8 until all processes are completed\\
+\hspace*{1cm} 6.4. Select process with shortest remaining time\\
+\hspace*{1cm} 6.5. Execute for 1 time unit\\
+\hspace*{1cm} 6.6. Update "current\_time" and remaining time\\
+\hspace*{1cm} 6.7. If process completes, compute turnaround and waiting times\\
+\hspace*{1cm} 6.8. Update "total\_waiting"\\
+\hspace*{1cm} 6.9. Output average waiting time\\
+7. Read number of processes, $n$\\
+8. Read process list (ID, Arrival Time, Burst Time, Priority)\\
+9. Sort process list by arrival time\\
+10. Compute average waiting times using all scheduling algorithms\\
+11. Output best scheduling algorithm with lowest average waiting time\\
+12. Stop\\
+
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{cpu_scheduling.c}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{300} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=300]{12.png} 
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+C program simulating various scheduling algorithms on a process mix was executed and verified.
+\end{quote}
+
+% EXPERIMENT 13
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Banker's Algorithm}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Obtain a (deadlock-free) process mix and simulate the banker’s algorithm to determine
+a safe execution sequence.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Read the "available" vector\\
+3. Read the number of processes, "np" and number of distinct resource types, "nr"\\
+4. Read the "allocated" and "max" matrices for each process from the user\\
+5. Compute the "need" matrix subtracting the allocation from the max\\
+6. Initialize vector "completed" (having as many elements as the number of processes) \hspace*{0.4cm} to false\\
+7. Initialize vector "work" (having as many elements as the number of distinct resource \hspace*{0.4cm} types) to available\\
+8. Initialize vector "sequence" (having as many elements as the number of processes) to \hspace*{0.4cm} store the safe sequence\\
+9. Search "completed" for an element whose value is false having need less than work\\
+10. If no such element exists, goto step-14\\
+11. Add the "allocated" vector of the process to the "work" vector\\
+12. Update the completed flag of the process to true\\
+13. Append the process id/ name into "sequence" and goto step-9\\
+14. If all entries of the "completed" vector are true, system is in safe state, goto step-16\\
+15. Else, system is in unsafe state, goto step-17 \\
+16. Output the safe sequence\\
+17. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{bankers_algorithm.c}%program name
+\end{quote}
+
+% OUTPUT
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{300} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=300]{13.png} 
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+C program simulating banker’s algorithm on a process mix was executed and verified.
+\end{quote}
+
+\end{document}

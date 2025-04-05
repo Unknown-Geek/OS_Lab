@@ -1,0 +1,705 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Page layout settings
+\usepackage[a4paper, left=2cm, right=1cm, top=2cm, bottom=1cm]{geometry}
+\usepackage{minted}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{graphicx} % for image inclusion
+\usepackage{float} % for positioning images
+\usepackage{array}
+\usepackage{fancyhdr}  % Load fancyhdr package
+\renewcommand{\headrulewidth}{0pt}  % Remove the horizontal line in header
+\pagestyle{empty}  % Start with an empty default style
+
+\pagestyle{fancy}  
+\fancyhf{}  
+\fancyhead[L]{Date: }  % Increase font size & bold
+\fancyhead[R]{Page No: } 
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+% EXPERIMENT 14
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Page Replacement Algorithms}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Simulate the\\
+a)FIFO\\
+b)LRU\\
+c) LFU\\
+as follows: \\
+First, generate a random page-reference string where page numbers range from 0 to 9. Apply the random page-reference string to each algorithm, and record the number of page faults incurred by each algorithm. Assume that demand paging is used.\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Generate and store a random page reference string.\\
+3. Simulate FIFO\\
+\hspace*{1cm} 3.1. Initialize frames as a circular queue and set page faults to 0. \\
+\hspace*{1cm} 3.2. For each page reference, check if it's in frames.\\
+\hspace*{1cm} 3.3. If not, replace the oldest page and increase page faults.\\
+\hspace*{1cm} 3.4. Output page faults.\\
+4. Simulate LRU \\
+\hspace*{1cm} 4.1. Initialize frames as a stack and set page faults to 0.\\
+\hspace*{1cm} 4.2. For each page reference, check if it's in frames.\\
+\hspace*{1cm} 4.3. If found, move it to the top.\\
+\hspace*{1cm} 4.4. Else, remove the least recently used page if full, add the new page, and increase page faults.\\
+\hspace*{1cm} 4.5. Output page faults.\\
+5. Simulate LFU \\
+\hspace*{1cm} 5.1. Initialize frames as a queue and track usage.\\
+\hspace*{1cm} 5.2. Set page faults to 0.\\
+\hspace*{1cm} 5.3. For each page reference, check if it's in frames\\
+\hspace*{1cm} 5.4. If found, update its usage.\\
+\hspace*{1cm} 5.5. Else, replace the least used page if full, otherwise add the new page, and increase page faults.\\
+\hspace*{1cm} 5.6. Output page faults.\\
+6. Execute the simulation on the random page reference string.\\
+7. Stop \\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{page_replacement.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{14.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program simulating various paging algorithms was executed and verified.
+\end{quote}
+
+% EXPERIMENT 15
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Memory Allocation Methods}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Implementation of the Memory Allocation Methods for fixed partition\\
+a) First Fit\\
+b) Worst Fit\\
+c) Best Fit\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Initialize memory,\\
+\hspace*{1cm} 2.1. Define necessary constants and structures for partitions.\\
+\hspace*{1cm} 2.2. Initialize an array of partitions with fixed sizes and allocation status.\\
+\hspace*{1cm} 2.3. Print the partition details.\\
+3. Define function to display partitions\\
+\hspace*{1cm} 3.1. Iterate through the partition array and print each partition’s size and allocation status.\\
+4. Define function for First Fit Allocation,\\
+\hspace*{1cm} 4.1. Iterate through the partition array.\\
+\hspace*{1cm} 4.2. If a partition has enough size and is not allocated, allocate it and return its \hspace*{2cm} index.\\
+\hspace*{1cm} 4.3. If no suitable partition is found, return -1.\\
+5. Define function for Worst Fit Allocation,\\
+\hspace*{1cm} 5.1. Initialize variables to store the index of the partition with the largest size \hspace*{2cm} (index) and its size (max\_size). \\
+\hspace*{1cm} 5.2. Iterate through the partition array.\\
+\hspace*{1cm} 5.3. If a partition has enough size and is not allocated and its size is larger than \hspace*{2cm} max\_size, update index and max\_size.\\
+\hspace*{1cm} 5.4. If a suitable partition is found, allocate it, update its allocation status, and \hspace*{2cm} return its index.\\
+\hspace*{1cm} 5.5. If no suitable partition is found, return -1.\\
+6. Define function for Best Fit Allocation,\\
+\hspace*{1cm} 6.1. Initialize variables to store the index of the partition with the smallest \hspace*{2cm} sufficient size (index) and its size (min\_size).\\
+\hspace*{1cm} 6.2. Iterate through the partition array.\\
+\hspace*{1cm} 6.3. If a partition has enough size and is not allocated and its size is smaller than \hspace*{2cm} min\_size, update index and min\_size.\\
+\hspace*{1cm} 6.4. If a suitable partition is found, allocate it, update its allocation status, and \hspace*{2cm} return its index.\\
+\hspace*{1cm} 6.5. If no suitable partition is found, return -1.\\
+7. Display a menu to select the algorithm to run\\
+8. Read the size of partition from the user\\
+9. Execute the selected algorithm\\
+10. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{memory_allocation.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{15.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to implement memory allocation methods was executed and verified.
+\end{quote}
+
+% EXPERIMENT 16
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Familiarization of I/O System Calls}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Create a command listdir that works like the ls command and will be invoked as listdir path where path is the path of some directory in your system. The output should be a list of files and directories in that path along with the following information for each file or directory:\\
+• file permissions and file-type information\\
+• the user identity of the file owner\\
+• the time of last access\\
+• the time of last modification to contents.\\
+You may have to use system calls like "opendir()", "readdir()", "stat()" etc.\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Read input "path" from the command line\\
+3. Open a directory stream with the path, by invoking the "opendir()" system call\\
+4. Iterate through each entry in the directory stream by invoking the "readdir()" system \hspace*{0.4cm} call\\
+\hspace*{1cm} 4.1. Format the full path\\
+\hspace*{1cm} 4.2. Invoke the "stat()" system call to retrieve file status information\\
+\hspace*{1cm} 4.3. Format the access and modified time\\
+\hspace*{1cm} 4.4. Obtain the permissions by parsing the mode details from the output of "stat()"\\
+\hspace*{1cm} 4.5. Output the required information\\
+5. Close the directory stream\\
+6. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{file_listing.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{16.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to list files and directories in a given path was executed and verified.
+\end{quote}
+
+% EXPERIMENT 17
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Disk Scheduling Algorithms}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Simulate the disk-scheduling algorithms as follows:\\
+a) FCFS\\
+b) SCAN\\
+c) LOOK\\
+d) CSCAN\\
+Your program will service a disk with 5,000 cylinders numbered 0 to 4,999. The program will generate a random series of 10 cylinder requests and service them according to each of the algorithms listed earlier. The program should be invoked with the initial position of the disk head and the last request served as command line arguments and should report the total number of head movements required by each algorithm.\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Read arguments (initial position and last served request) from command line\\
+3. Validate the arguments to ensure that they are within the correct range\\
+4. Generate a random list of cylinder request\\
+5. Define a function to simulate head movement and track the head movement count\\
+6. Define a function to simulate the FCFS algorithm  \\
+\hspace*{1cm} 6.1. Start from the initial head position.  \\
+\hspace*{1cm} 6.2. Iterate through the list of cylinder requests in the given order.  \\
+\hspace*{1cm} 6.3. Move the head to each requested cylinder.  \\
+\hspace*{1cm} 6.4. Track the total head movement count.  \\
+\hspace*{1cm} 6.5. Display the total head movement count after servicing all requests.  \\
+7. Define a function to simulate the SCAN algorithm  \\
+\hspace*{1cm} 7.1. Sort the cylinder requests in ascending order.  \\
+\hspace*{1cm} 7.2. Identify the initial direction of head movement.  \\
+\hspace*{1cm} 7.3. Move the head in the given direction, servicing requests along the way.  \\
+\hspace*{1cm} 7.4. Stop when reaching the extreme cylinder in that direction.  \\
+\hspace*{1cm} 7.5. Reverse the direction.  \\
+\hspace*{1cm} 7.6. Continue servicing the remaining requests in the opposite direction.  \\
+\hspace*{1cm} 7.7. Display the total head movement count after servicing all requests.  \\ 
+8. Define a function to simulate the LOOK algorithm  \\
+\hspace*{1cm} 8.1. Sort the cylinder requests in ascending order.  \\
+\hspace*{1cm} 8.2. Identify the initial direction of head movement.  \\
+\hspace*{1cm} 8.3. Move the head in the given direction, servicing requests until reaching the last request in that direction.  \\
+\hspace*{1cm} 8.4. Reverse the direction.  \\
+\hspace*{1cm} 8.5. Continue servicing the remaining requests in the opposite direction.  \\
+\hspace*{1cm} 8.6. Display the total head movement count after servicing all requests.  \\ 
+9. Define a function to simulate the C-SCAN algorithm  \\
+\hspace*{1cm} 9.1. Sort the cylinder requests in ascending order.  \\
+\hspace*{1cm} 9.2. Identify the initial direction of head movement.  \\
+\hspace*{1cm} 9.3. Move the head in the given direction, servicing requests along the way.  \\
+\hspace*{1cm} 9.4. Stop when reaching the extreme cylinder in that direction.  \\
+\hspace*{1cm} 9.5. Jump to the extreme cylinder on the opposite side without servicing requests.  \\
+\hspace*{1cm} 9.6. Continue servicing requests in the same direction.  \\
+\hspace*{1cm} 9.7. Display the total head movement count after servicing all requests.  \\
+10. Run the simulation for FCFS\\
+11. Sort the cylinder requests in ascending order\\
+12. Run the simulation for SCAN\\
+13. Run the simulation for LOOK\\
+14. Run the simulation for CSCAN\\
+15. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{disk_scheduling.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{17.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to simulate various disk-scheduling algorithms was executed and verified.
+\end{quote}
+
+% EXPERIMENT 18
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Resource Usage System Calls}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Write a simple program to print the system date and time. Have your program also print how long it (in the strict sense, the corresponding process) ran in user and kernel modes. Next add a loop in your program that runs for a long time (some loop which simply counts up to a huge value) and then rerun the program. See how the two time values have changed.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Output the system date and time\\
+3. Let "usage" be a variable to store the resource usage information\\
+4. Invoke the "getrusage()" system call to retrieve resource usage information and store \hspace*{0.4cm} it into "usage"\\
+5. Display the values of time spent by the program in user mode and kernel mode \hspace*{1cm}  respectively\\
+6. Execute a long running loop that counts upto a large value\\
+7. Repeat steps 4 \& 5\\
+8. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{system_time_usage.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{18.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to display the system date and time as well as time spent by the process in user and kernel mode was executed and verified.
+\end{quote}
+
+% EXPERIMENT 19
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{\parbox{\textwidth}{\centering Multithreaded Calculation of Measures of Central Tendency}}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Write a multithreaded program that calculates the mean, median, and standard deviation for a list of integers. This program should receive a series of integers on the command line and will then create three separate worker threads. The first thread will determine the mean value, the second will determine the median and the third will calculate the standard deviation of the integers. The variables representing the mean, median, and standard deviation values will be stored globally. The worker threads will set these values, and the parent thread will output the values once the workers have exited.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Let the number of arguments passed to the program be $N$ and the argument list be \hspace*{0.4cm} $nums$\\
+3. Define variables "mean", "median" and "sd" (standard deviation)\\
+4. Define function "parseInput" to parse the string arguments into floating point values\\
+5. Define function "calcMean", "calcMedian" and "calcSd"\\
+6. Create threads for each of the functions\\
+7. Join the threads and store the value returned by the functions to the respective \hspace*{0.6cm} variables\\
+8. Output the results\\
+9. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{multithreaded_statistics.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{19.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to calculate the mean, median, and standard deviation for a list of integers in different threads was executed and verified.
+\end{quote}
+
+% EXPERIMENT 20
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{IPC Using Shared Memory}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+The time command can be used to know the actual time taken to execute a command. For example time ls will tell you how much time it took to execute the ls. Let us now build our version of time. You need to create a command exectime that will be run as "exectime cmnd" and will report the amount of elapsed time to run the specified command cmnd. (For this, you need to write a program time.c (or with any other name) and compile to an executable exectime and then copy it to the /usr/bin directory as was discussed in the class.) The strategy is to fork a child process that will execute the specified command using execvp(). However, the child, before it executes the command, will record a timestamp of the current time (call it starting time). The parent process will wait for the child process to terminate. Once the child terminates, the parent will record the current timestamp (call it ending time). The difference between the starting and ending times represents the elapsed time to execute the command. As the parent and child are separate processes, they will need to arrange how the starting time will be shared between them. For our case, you will use shared memory. The child process should write the starting time to a region of shared memory before it calls execvp(). After the child process terminates, the parent will read the starting time from shared memory and proceed with calculating the elapsed time. You should use the gettimeofday() system call to record the current timestamp.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Let "start\_time" be a region of shared memory\\
+3. Invoke the "fork()" system call and store the return value into "pid"\\
+4. If "pid" is less than zero, the fork failed, goto step-7\\
+5. Else if "pid" is zero, \\
+\hspace*{1cm} 5.1. Invoke the "gettimeofday()" system call and store the current timestamp to \hspace*{2cm} "start\_time"\\
+\hspace*{1cm} 5.2. Execute the required command by invoking the "execvp()" system call\\
+6. Else,\\
+\hspace*{1cm} 6.1. Wait until the child process terminates\\
+\hspace*{1cm} 6.2. Record the current timestamp to "end\_time"\\
+\hspace*{1cm} 6.3. Compute the difference between "end\_time" and "start\_time"\\
+\hspace*{1cm} 6.4. Output the difference as the time taken to execute the given command\\
+7. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{shared_memory_ipc.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{20.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to determine time taken by a process to execute a given command was executed and verified.
+\end{quote}
+
+% EXPERIMENT 21
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Multiprocessing System Calls}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Write a program to add two integers (received via command line) and compile it to an executable myadder. Now write another program that forks a new process. Make the child process add two integers by replacing its image with the myadder image using execvp() system call.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. In myadder.c,\\
+\hspace*{1cm} 2.1. Let "a" and "b" be two integers\\
+\hspace*{1cm} 2.2. Read two integers from command line and store to "a" and "b"\\
+\hspace*{1cm} 2.3. Add "a" and "b" and print the result\\
+\hspace*{1cm} 2.4. Return\\
+3. Compile myadder.c to an executable myadder\\
+4. In main.c,\\
+\hspace*{1cm} 4.1. Let "a" and "b" be two integers\\
+\hspace*{1cm} 4.2. Read two integers as input and store to "a" and "b"\\
+\hspace*{1cm} 4.3. Use the "fork()" system call to create a child process and store the returned  \hspace*{2cm}value to "pid"\\
+\hspace*{1cm} 4.4. If "pid" is less than zero, fork has failed, goto step-4.8\\
+\hspace*{1cm} 4.5. If "pid" is greater than zero, current process is the parent, use the "wait()" \hspace*{2cm} system call to wait until the child terminates and goto step-4.8\\
+\hspace*{1cm} 4.6. Else current process is the child, goto step-4.7\\
+\hspace*{1cm} 4.7. Use the "execvp()" system call by passing "myadder" as the program name \hspace*{2cm} and "a" and "b" as its arguments\\
+\hspace*{1cm} 4.8. Return\\
+5. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{multiprocessing.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{21.png}
+        \end{minipage}
+    }
+\end{figure}
+
+\subsection*{\underline{ADDITIONAL PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{myadder.c}
+\end{quote}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to demonstrate the use of execvp system call was executed and verified.
+\end{quote}
+
+% EXPERIMENT 22
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{\parbox{\textwidth}{\centering Process Synchronization to Solve TA Problem Using Semaphores}}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+A university computer science department has a teaching assistant (TA) who helps under-graduate students with their programming assignments during regular office hours. The TA's office is rather small and has room for only one desk with a chair and computer. There are three chairs in the hallway outside the office where students can sit and wait if the TA is currently helping another student. When there are no students who need help during office hours, the TA sits at the desk and takes a nap. If a student arrives during office hours and finds the TA sleeping, the student must awaken the TA to ask for help. If a student arrives and finds the TA currently helping another student, the student sits on one of the chairs in the hallway and waits. If no chairs are available, the student will come back at a later time. Using semaphores, implement a solution that coordinates the activities of the TA and the students.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Let "ta" be a binary semaphore indicating the availability of the TA\\
+3. Let "chairs" be a counting semaphore indicating the number of vacant chairs\\
+4. Let "students" be an array that stores the thread identifiers for each thread\\
+5. At random intervals, create a thread representing a student\\
+\hspace*{1cm} 5.1. Check if the TA is available\\
+\hspace*{1cm} 5.2. If the TA is available, acquire the semaphore for the period the TA is helping \hspace*{2cm} the student and goto step-5.6\\
+\hspace*{1cm} 5.3. Else check if chairs are available\\
+\hspace*{1cm} 5.4. If chairs are available, acquire a chair from the "chairs" semaphore by \hspace*{2cm} decrementing it,  wait until the TA is available, release the chair and goto \hspace*{2cm} step-5.2\\
+\hspace*{1cm} 5.5. Else, wait for some time and goto step 5.1\\
+\hspace*{1cm} 5.6. Release the "ta" semaphore\\
+6. Execute all the threads concurrently and join the threads\\
+7. Stop\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{teaching_assistant_problem.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{22.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to solve the TA problem was executed and verified.
+\end{quote}
+
+% EXPERIMENT 23
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{\parbox{\textwidth}{\centering Process Synchronization to Solve Dining Philosophers Problem Using Semaphores}}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Implement the deadlock-free semaphore-based solution for the dining philosophers' problem.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Let the number of philosophers be 5 and the number of chopsticks be 5\\
+3. Let "chopsticks" be an array of size 5 having 5 distinct semaphores for each chopstick\\
+4. Let "philosophers" be an array of size 5 to store the thread identifiers of each thread\\
+5. Create threads for each philosopher,\\
+\hspace*{1cm} 5.1. Wait for $i^{th}$ and ${i+1}^{th}$ chopstick to be available\\
+\hspace*{1cm} 5.2. If required chopsticks are available, acquire the chopsticks and "eat", and goto \hspace*{2cm} step-5.4\\
+\hspace*{1cm} 5.3. Else goto step-5.1\\
+\hspace*{1cm} 5.4. Release the chopsticks\\
+\hspace*{1cm} 5.5. Return\\
+6. Execute all the threads concurrently and join the threads\\
+7. Stop
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{dining_philosophers.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{23.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to solve the dining philosophers problem using semaphores was executed and verified.
+\end{quote}
+
+% EXPERIMENT 24
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Address Translation}}} 
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+Simulate the address translation in the paging scheme as follows: The program receives three command line arguments in the order,\\
+• size of the virtual address space (in megabytes)\\
+• page size (in kilobytes)\\
+• a virtual address (in decimal notation)\\
+The output should be the physical address corresponding to the virtual address in ⟨ frame number, offset⟩ format. You may assume that the page table is implemented as an array indexed by page numbers. (NB: If the page table has no index for the page number determined from the virtual address, you may just declare a page table miss!)\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+1. Start\\
+2. Read inputs from the command line arguments.\\
+3. Compute page table details.\\
+\hspace*{1cm} 3.1. Convert virtual address space size from MB to kB.\\
+\hspace*{1cm} 3.2. Compute the total number of pages.\\
+4. Initialize page table\\
+\hspace*{1cm} 4.1. Allocate memory for the page table.\\
+\hspace*{1cm} 4.2. Populate the page table with random frame mappings.\\
+5. Perform address translation\\
+\hspace*{1cm} 5.1. Compute the page number.\\ 
+\hspace*{1cm} 5.2. Compute the offset within the page.\\
+6. Validate address translation \\
+\hspace*{1cm} 6.1. If page number is less than or equal to page count, output "Invalid virtual address!" and exit.\\
+\hspace*{1cm} 6.2. If frame corresponding to page number is -1, output "Page Table Miss!" and exit.\\
+7. Compute and output physical address\\
+\hspace*{1cm} 7.1. Retrieve the frame number from the page table.\\
+\hspace*{1cm} 7.2. Output the physical address in ⟨ frame number, offset ⟩ format.\\
+8. Stop \\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{c}{paging_address_translation.c}
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{24.png}
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+C program to simulate the address translation in the paging scheme was executed and verified.
+\end{quote}
+
+\end{document}

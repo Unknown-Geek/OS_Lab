@@ -1,0 +1,564 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Page layout settings
+\usepackage[a4paper, left=2cm, right=1cm, top=2cm, bottom=1cm]{geometry}
+\usepackage{minted}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{graphicx} % for image inclusion
+\usepackage{float} % for positioning images
+\usepackage{array}
+\usepackage{fancyhdr}  % Load fancyhdr package
+\renewcommand{\headrulewidth}{0pt}  % Remove the horizontal line in header
+\pagestyle{empty}  % Start with an empty default style
+
+\pagestyle{fancy}  
+\fancyhf{}  
+\fancyhead[L]{Date: }  % Increase font size & bold
+\fancyhead[R]{Page No: } 
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+% EXPERIMENT 2
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 1}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Create a menu driven script to print the following
+processor information using the proc file system:\\
+(a) vendor (manufacturer) id\\
+(b) model name\\
+(c) processor generation\\
+(d) number of processor chips\\
+(e) number of processor cores\\
+(f) is your processor hyperthreaded?\\
+(g) number of logical processors\\
+(h) id of the core to which each logical processor is mapped\\
+(i) speed of each logical processor\\
+(j) cache size\\
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Display the menu\\
+3. Prompt the user to enter a choice\\
+4. Based on the user's choice display the relevant information\\
+5. Loop until the user selects the exit option\\
+6. End
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{2-1.png} % Ensures it fits within the page
+            \includegraphics[width=\textwidth]{2-2.png}
+        \end{minipage}
+    }
+\end{figure}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{2-3.png} % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script for displaying processor information was executed and verified.
+\end{quote}
+
+% EXPERIMENT 3
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 2}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Create a menu driven script to print the following memory information using the proc file
+system:\\
+(a) total memory in the system\\
+(b) amount of memory left unused\\
+(c) amount of memory available\\
+(d) amount of memory used as cache.
+
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Display the menu.\\
+3. Get the option as user input.\\
+4. Based on the user's choice, fetch and display the required information from '/proc/meminfo' file.\\
+5. Loop until the user selects the exit option.\\
+6. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{3.png}  % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script for displaying memory information was executed and verified.
+\end{quote}
+
+% EXPERIMENT 4
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 3}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Implement a menu driven scientific calculator. You should consider arithmetic operators,
+sin,cos, tan, power and square root.
+
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Display Menu\\
+3. Get user input - the operation to be performed.\\
+4. For operations - Add, Subtract, Multiply and Divide- read two operands from the user.\\
+5. For operation "Square" - get the number to be squared the user.\\
+6. For operation "Exponentiation" - read the base, exponent pair from the user.\\
+7. For trigonometric operations read the angle in degrees as input and convert and store the value in radians.\\
+8. Use the read inputs and compute the required results using 'bc -l'.\\
+9. Print the result.\\
+10. Loop the menu until the 'exit' condition is met.\\
+11. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{4-1.png} % Ensures it fits within the page
+            \includegraphics[width=\textwidth]{4-2.png} % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script for a scientific calculator was executed and verified.
+\end{quote}
+
+% EXPERIMENT 5
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 4}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Print all prime numbers in a range.
+
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Read the range 'start' and 'end'\\
+3. Loop till step 8 from 'start' to 'end'\\
+4. If the current number is less than 2, skip.\\
+5. If the current number is 2, print.\\
+6. Else - check for remainders on division from current number to square root of current number.\\
+7. If no remainders exist - skip.\\
+8. Else - print current number.\\
+9. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{5.png} % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script to print prime numbers in a given range was executed and verified.
+\end{quote}
+
+% EXPERIMENT 6
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 5}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Write a menu driven program to convert a positive decimal number to binary, octal or
+hexadecimal based on the user's choice. Each of the conversions should be implemented
+using separate functions
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Prompt the user to enter a number\\
+3. Validate the input is a positive decimal number\\
+4. Display the menu\\
+5. Prompt the user to enter a choice\\
+6. If choice is 1:\\
+   Convert to binary and display the result\\
+7. If choice is 2:\\
+   Convert to octal and display the result\\
+8. If choice is 3:\\
+   Convert to hexadecimal and display the result\\
+9. If choice is 4:\\
+   Display exit message\\
+10. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{6.png} 
+            % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A menu-driven bash script for number conversion was executed and verified.
+\end{quote}
+
+% EXPERIMENT 7
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 6}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Read an integer N, a string word and a filename via command line. If a word occurs more
+than N times in the file, remove all its occurrences in the file.
+
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Prompt the user to enter the number of occurrences (N)\\
+3. Prompt the user to enter the word to search for\\
+4. Prompt the user to enter the filename\\
+5. Check if the file exists\\
+   - If the file does not exist:\\
+     - Display error message\\
+     - Exit program\\
+6. Count the occurrences of the word in the file\\
+7. Check if the word occurs more than N times\\
+   - If word count > N:\\
+     - Remove all occurrences of the word from the file\\
+     - Display message that all occurrences have been removed\\
+   - If word count <= N:\\
+     - Display message with the count and that it's not more than N\\
+8. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{7.png} 
+            % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script for removing occurrences of a word beyond N times was executed and verified.
+\end{quote}
+
+% EXPERIMENT 8
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 7}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+You have a file s4csb2.txt with the following format:
+AdmnNo,Name,Address,PhoneNo,Email.
+Now create a command recedit which is to be invoked as:
+recedit op ID
+Here op is one among the operations add,search,update,delete and ID is an admission
+number.\\
+The command behaviour is summarized below:\\
+• raise an error if a sufficient number of arguments are not supplied.\\
+• to add a new student with the given ID, get the other pertinent details and create a new row for the student in the file s4csb1.txt. If such a student already exists, raise an error.\\
+• if the operation is search, the pertinent details should be printed if such a student exists or
+raise an error otherwise.\\
+• if the operation is updated, get the details and update the student record.\\
+• if the operation is delete, remove the student record.
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Define file name as "s4csb2.txt"\\
+3. Check if the number of arguments is not equal to 2\\
+   - If true:\\
+     - Display error message\\
+     - Display usage information\\
+     - Exit program with error code 1\\
+4. Set operation to first argument\\
+5. Set student ID to second argument\\
+6. Define function to check if student exists in file\\
+7. Based on the operation value:\\
+   - If operation is "add":\\
+     - Check if student exists\\
+       - If true: Display "Exists" message\\
+       - If false:\\
+         - Prompt for details\\
+         - Append student record to file\\
+         - Display success message\\
+   - If operation is "search":\\
+     - Check if student exists\\
+       - If true: Display the student record\\
+       - If false: Display "not present" message\\
+   - If operation is "update":\\
+     - Check if student exists\\
+       - If true:\\
+         - Prompt for new details\\
+         - Replace existing record with updated information\\
+         - Display success message\\
+       - If false: Display error message\\
+   - If operation is "delete":\\
+     - Check if student exists\\
+       - If true:\\
+         - Remove student record from file\\
+         - Display success message\\
+       - If false: Display error message\\
+8. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{8.png} 
+            % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script implementing student record management was executed and verified.
+\end{quote}
+
+% EXPERIMENT 9
+\newpage
+\begin{center}
+\section*{\LARGE \textbf{\underline{Shell Scripting Experiment 8}}} % replace with relevant experiment number (shell scripting experiments 2 - 9)
+\end{center}
+
+\subsection*{\underline{AIM}}
+\begin{quote}
+%<aim>%
+Create a menu driven script to print the following process information:\\
+(a) Number of processes forked since the last boot\\
+(b) Number of processes currently in the system\\
+(c) Number of running processes\\
+(d) Number of blocked processes\\
+(e) PID of the current shell\\
+(f) Number of context switches performed by this shell.\\
+How many of these were forcibly taken?
+\end{quote}
+
+\subsection*{\underline{ALGORITHM}}
+\begin{quote}
+%<algorithm>%
+1. Start\\
+2. Display menu with process information options\\
+3. Define function to get number of processes forked since last boot:\\
+   - Read value of process since last boot\\
+4. Define function to get number of processes currently in system:\\
+   - Count all processes using ps command and wc\\
+5. Define function to get number of running processes:\\
+   - Count processes with state 'R' using ps and grep\\
+6. Define function to get number of blocked processes:\\
+   - Count processes with state 'D' using ps and grep\\
+7. Define function to get PID of current shell:\\
+   - Return value of \$\$ variable\\
+8. Define function to get number of context switches by this shell:\\
+   - Calculate sum of voluntary and involuntary context switches\\
+9. Define function to get number of forced context switches by this shell:\\
+   - Read involuntary context switches\\
+10. Select the option from the menu\\
+11. Goto the appropriate function\\
+12. End\\
+\end{quote}
+
+\subsection*{\underline{PROGRAM}}
+\begin{quote}
+%<code>%
+\inputminted[fontsize=\small,breaklines,breakanywhere]{sh}{shell1.sh}%program name
+\end{quote}
+
+% OUTPUT
+\newpage
+
+\subsection*{\underline{OUTPUT}}
+
+\begin{figure}[H] 
+    \centering
+    \fbox{
+        \begin{minipage}{0.8\textwidth} % Adjusts width dynamically
+            \centering
+            \includegraphics[width=\textwidth]{9.png} 
+            % Ensures it fits within the page
+        \end{minipage}
+    }
+\end{figure}
+
+% RESULT
+
+\subsection*{\underline{RESULT}}
+\begin{quote}
+%<result>%
+A bash script for displaying process information was executed and verified.
+\end{quote}
+
+\end{document}
