@@ -1,5 +1,5 @@
 # OS_Lab
-Collection of Operating System Laboratory programs written in C and Shell.
+Collection of Operating System Lab (KTU S4 CS - 2019 Scheme) programs written in C and Shell.
 
 ## Shell Scripts
 - [shell1.sh](/Shell%20Scripts/shell1.sh) - Shell script to display system information like OS name, kernel version, user accounts, available shells, etc.
