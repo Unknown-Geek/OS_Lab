@@ -30,6 +30,9 @@ Collection of Operating System Laboratory programs written in C and Shell.
 - [teaching_assistant_problem.c](/C%20Programs/teaching_assistant_problem.c) - C program solving the Teaching Assistant (TA) problem using semaphores
 - [dining_philosophers.c](/C%20Programs/dining_philosophers.c) - C program solving the Dining Philosophers problem using semaphores
 - [paging_address_translation.c](/C%20Programs/paging_address_translation.c) - C program simulating address translation in paging scheme
+- [IPC_sender.c](/C%20Programs/IPC_sender.c) - C program implementing message queue IPC (sender process)
+- [IPC_receiver.c](/C%20Programs/IPC_receiver.c) - C program implementing message queue IPC (receiver process)
+- [producer_consumer_problem.c](/C%20Programs/producer_consumer_problem.c) - C program solving the Producer-Consumer problem using semaphores and mutex
 
 ## Documentation
 - [shell.tex](/Latex/shell.tex) - LaTeX document containing detailed explanations, algorithms for shell scripts
