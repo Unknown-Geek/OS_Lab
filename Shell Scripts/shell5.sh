@@ -1,7 +1,7 @@
 read -p "Enter the lower bound  : " a
 read -p "Enter the upper bound  : " b
 echo "Prime numbers between $a and $b (including limits) are :"
-for	;
+for((i=$a ; i<=$b ; i++));
 do
 	if (($i==1)); then
 		continue
