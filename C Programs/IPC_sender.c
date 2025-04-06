@@ -49,11 +49,10 @@ int main()
     msgsnd(msgid_send, &message, sizeof(message.msg_text), 0);
 
     // Clear message buffer and receive concatenated string
-    memset(message.msg_text, 0, sizeof(message.msg_text));
-    msgrcv(msgid_rcv, &message, sizeof(message.msg_text), 1, 0);
-
-    char str[100];
-    strcpy(str, message.msg_text);
+    char str[300];
+    memset(message.msg_text,0,sizeof(message.msg_text));
+    msgrcv(msgid_rcv,&message, sizeof(message.msg_text),1,0);
+    strcpy(str,message.msg_text);
 
     printf("Received String : %s\n", message.msg_text);
 
