@@ -9,7 +9,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 4) {
-        printf("Usage: %s <virtual space in KB> <page size in KB> <virtual address>\n", argv[0]);
+        printf("Usage: %s <virtual space in MB> <page size in KB> <virtual address>\n", argv[0]);
         return 1;
     }
 
